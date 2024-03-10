@@ -9,7 +9,6 @@
     "vercel-build": "echo building"
   },
   "devDependencies": {
-    "@types/bcrypt": "latest",
     "@types/bun": "latest",
     "@types/express": "latest",
     "rimraf": "latest"
@@ -18,8 +17,8 @@
     "typescript": "latest"
   },
   "dependencies": {
-    "bcrypt": "latest",
     "express": "latest",
+    "jsonwebtoken": "latest",
     "mongoose": "latest"
   }
 }

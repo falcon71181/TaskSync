@@ -2,8 +2,10 @@ import express from "express";
 import mongoose from "mongoose";
 import router from "./routes/routes";
 
-// cors
 const app = express();
+
+// cors
+app.use(express.json());
 
 // env
 const SERVER_PORT = process.env.SERVER_PORT ?? 3333;
