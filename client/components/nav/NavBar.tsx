@@ -23,7 +23,7 @@ const NavBar = () => {
 
   const [isLogin, setIsLogin] = useState(false);
 
-  const handleLogOut = () => {
+  const logoutUser = () => {
     localStorage.clear();
     window.location.replace("/login");
   };
@@ -64,15 +64,20 @@ const NavBar = () => {
               {name}
             </Link>
           ))}
+        <ThemeSwitcher />
         {isLogin && (
-          <div className="text-lg">
-            <div className="dark:text-white_lighter text-black tracking-wide font-semibold">
+          <div className="h-full flex gap-3 items-center text-lg">
+            <div className="dark:text-white_lighter text-black tracking-wider font-medium">
               {localStorage.getItem("username")}
             </div>
-            <FiLogOut color="red" onClick={handleLogOut} />
+            <button
+              onClick={logoutUser}
+              className="inline-flex w-full whitespace-nowrap items-center justify-center px-4 py-2 border border-red-300 font-medium text-sm rounded-md transition-colors cursor-pointer bg-transparent text-black dark:text-white hover:bg-red-400 dark:hover:bg-[#27272a] dark:hover:text-red-300"
+            >
+              Logout
+            </button>
           </div>
         )}
-        <ThemeSwitcher />
       </section>
     </main>
   );
