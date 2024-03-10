@@ -1,5 +1,6 @@
 import { Request, RequestHandler, Response } from "express";
 import { TaskModel } from "../models/task.model";
+import { Task } from "../types/task.types";
 
 // get all tasks
 const getAllTasks: RequestHandler = async (req: Request, res: Response) => {
@@ -55,7 +56,7 @@ const createTask: RequestHandler = async (req: Request, res: Response) => {
 };
 
 // delete task
-const deleteTask = async (req: Request, res: Response) => {
+const deleteTask: RequestHandler = async (req: Request, res: Response) => {
   try {
     const email = (req as Request & { email: string }).email;
     const { taskId } = req.params;
@@ -84,9 +85,45 @@ const deleteTask = async (req: Request, res: Response) => {
     res.status(200).send({ message: "Task deleted successfully." });
   } catch (error) {
     // Handle errors
-    console.error("Error registering user:", error);
+    console.error("Error deleting task:", error);
     res.status(500).send({ error: "Internal server error." });
   }
 };
 
-export { getAllTasks, createTask, deleteTask };
+// update task status
+const updateTaskStatus: RequestHandler = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const email = (req as Request & { email: string }).email;
+    const { taskId } = req.params;
+
+    const task = await TaskModel.findById(taskId);
+
+    if (!task) {
+      const error = "Task not found.";
+      return res.status(404).send({ error: error });
+    }
+
+    // only same user can continue
+    if (task.userEmail != email) {
+      const error = "You don't have permissions.";
+      return res.status(401).send({ error: error });
+    }
+
+    // toggle isComplete
+    task.isCompleted = !task.isCompleted;
+
+    // save the updated task
+    await task.save();
+
+    res.status(200).send({ message: "Task status changed successfully." });
+  } catch (error) {
+    // Handle errors
+    console.error("Error changing task status:", error);
+    res.status(500).send({ error: "Internal server error." });
+  }
+};
+
+export { getAllTasks, createTask, deleteTask, updateTaskStatus };
