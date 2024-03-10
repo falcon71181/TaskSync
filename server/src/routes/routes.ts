@@ -1,5 +1,5 @@
 import { Router, type IRouter } from "express";
-import { users_router } from "./users";
+import { users_router } from "./users.route";
 
 const router: IRouter = Router();
 
