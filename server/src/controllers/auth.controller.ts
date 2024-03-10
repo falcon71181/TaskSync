@@ -68,4 +68,59 @@ const registerUser: RequestHandler = async (req: Request, res: Response) => {
   }
 };
 
-export { registerUser };
+// login user
+const loginUser: RequestHandler = async (req: Request, res: Response) => {
+  try {
+    let { email, password } = req.body;
+
+    // Trim whitespace from inputs
+    email = email.trim();
+    password = password.trim();
+
+    // Check for missing fields
+    if (!email || !password) {
+      const error = "Require all following data: email, password";
+      return res.status(400).send({ error: error });
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      const error = "Invalid email format.";
+      return res.status(400).send({ error: error });
+    }
+
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+      const error = "User doesn't exist";
+      return res.status(404).send({ error });
+    }
+
+    const hashedPassword = await Bun.password.hash(password, {
+      algorithm: "bcrypt",
+      cost: 8,
+    });
+
+    const isMatch = await Bun.password.verify(password, hashedPassword);
+
+    if (!isMatch) {
+      const error = "Wrong password";
+      return res.status(401).send({ error: error });
+    }
+
+    const token = createToken(email);
+
+    res.status(200).send({
+      message: "User logged in successfully.",
+      username: user.username,
+      token: token,
+    });
+  } catch (error) {
+    // Handle errors
+    console.error("Error registering user:", error);
+    res.status(500).send({ error: "Internal server error." });
+  }
+};
+
+export { registerUser, loginUser };
