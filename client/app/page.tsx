@@ -108,14 +108,24 @@ const Tasks = () => {
         ))}
       </div>
       <div className="flex flex-col w-full gap-3 items-center">
-        {taskData.map((task: Task, index: number) => (
-          <TaskCard
-            key={index}
-            props={task}
-            onDelete={deleteTask}
-            onDone={updateStatus}
-          />
-        ))}
+        {taskData
+          .filter((task: Task) => {
+            if (filter_tag === "completed") {
+              return task.isCompleted === true;
+            } else if (filter_tag === "inProgress") {
+              return task.isCompleted === false;
+            } else {
+              return true;
+            }
+          })
+          .map((task: Task, index: number) => (
+            <TaskCard
+              key={index}
+              props={task}
+              onDelete={deleteTask}
+              onDone={updateStatus}
+            />
+          ))}
       </div>
     </div>
   );
