@@ -9,14 +9,17 @@
     "vercel-build": "echo building"
   },
   "devDependencies": {
-    "@types/bun": "^1.0.8",
-    "@types/express": "^4.17.21",
-    "rimraf": "^5.0.5"
+    "@types/bcrypt": "latest",
+    "@types/bun": "latest",
+    "@types/express": "latest",
+    "rimraf": "latest"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "latest"
   },
   "dependencies": {
-    "express": "latest"
+    "bcrypt": "latest",
+    "express": "latest",
+    "mongoose": "latest"
   }
 }
