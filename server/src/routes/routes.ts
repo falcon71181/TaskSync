@@ -1,5 +1,6 @@
 import { Router, type IRouter } from "express";
-import { users_router } from "./users.route";
+import { user_router } from "./user.route";
+import { task_router } from "./task.route";
 
 const router: IRouter = Router();
 
@@ -9,6 +10,9 @@ router.get("/health", (_req, res) => {
 });
 
 // users router
-router.use("/users", users_router);
+router.use("/users", user_router);
+
+// tasks router
+router.use("/tasks", task_router);
 
 export default router;

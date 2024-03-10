@@ -4,4 +4,12 @@ interface IUser {
   password: string;
 }
 
-export { IUser };
+interface ITask {
+  userEmail: string;
+  title: string;
+  description?: string;
+  isCompleted: boolean | false;
+  tags: string[];
+}
+
+export { IUser, ITask };

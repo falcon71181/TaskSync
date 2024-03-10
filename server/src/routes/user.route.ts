@@ -11,4 +11,4 @@ router.post("/register", registerUser);
 // /users/login
 router.post("/login", loginUser);
 
-export { router as users_router };
+export { router as user_router };
