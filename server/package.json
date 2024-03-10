@@ -1,0 +1,22 @@
+{
+  "name": "tasksync",
+  "module": "src/server.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "bun run build && bun run build/server.js",
+    "build": "rimraf ./build && tsc",
+    "vercel-build": "echo building"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.0.8",
+    "@types/express": "^4.17.21",
+    "rimraf": "^5.0.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "express": "latest"
+  }
+}
