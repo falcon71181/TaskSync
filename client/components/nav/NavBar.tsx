@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { FiLogOut } from "react-icons/fi";
 import ThemeSwitcher from "@/app/ThemeSwitcher";
 import { usePathname } from "next/navigation";
 

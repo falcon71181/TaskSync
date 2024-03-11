@@ -3,6 +3,7 @@ import React, { useState, useEffect, SyntheticEvent } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import TaskCard from "@/components/task/TaskCard";
+import withAuth from "@/middleware/withAuth";
 import { IoAdd } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import type { Task } from "@/types/tasks";
@@ -45,8 +46,7 @@ const Tasks = () => {
 
       // Check if the request was successful
       if (response.ok) {
-        // Add data to local Storage
-        console.log("gg");
+        setIsAddTaskOpen(false);
       } else {
         // Handle Login failure
         setError(result.error);
@@ -128,7 +128,8 @@ const Tasks = () => {
         }
 
         if (response.ok) {
-          setTaskData(data);
+          // reversing it
+          setTaskData(data.reverse());
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -191,46 +192,38 @@ const Tasks = () => {
       <main
         className={`${isAddTaskOpen ? "flex" : "hidden"} absolute justify-center items-center`}
       >
-        <div className="relative flex justify-center items-center w-[20rem] sm:w-[30rem] md:w-[40rem] lg:w-[50rem] rounded-2xl bg-slate-900 transition-all duration-500">
+        <div className="relative flex justify-center items-center w-[20rem] sm:w-[25rem] md:w-[30rem] lg:w-[40rem] rounded-2xl border-[1px] dark:border-gray-300 bg-slate-700 dark:bg-background transition-all duration-500">
           <div className="absolute top-2 right-4 text-4xl cursor-pointer hover:text-red-300 transition-all duration-200">
             <IoMdClose onClick={closeTaskForm} />
           </div>
-          <div className="flex flex-col gap-5 p-8 w-full sm:w-[20rem] md:w-[30rem] lg:w-[40rem] transition-all duration-500">
+          <div className="flex flex-col items-center gap-5 p-8 w-full sm:w-[20rem] md:w-[30rem] lg:w-[40rem] transition-all duration-500">
             <p className="text-center text-3xl text-gray-300 mb-4">Add Task</p>
             <input
               type="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="text-white bg-slate-900 rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 focus:ring-offset-gray-800"
+              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Title"
               required
             />
-            <input
-              type="description"
+            <textarea
               value={description}
+              rows={4}
               onChange={(e) => setDescription(e.target.value)}
-              className="text-white bg-slate-900 rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 focus:ring-offset-gray-800"
+              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Description"
               required
             />
             {error && (
               <div className="text-red-400 font-semibold">Error : {error}</div>
             )}
-            <h1 className="text-sm text-[#7f8ea3] text-center">
-              Don't have an account?
-              <Link
-                className="ml-3 underline underline-offset-4 decoration-[#e1e7ef]/40 hover:decoration-[#e1e7ef]/80"
-                href="/register"
-              >
-                Register Now
-              </Link>
-            </h1>
             <button
-              type="button"
               onClick={handleAddTask}
-              className="inline-block cursor-pointer rounded-md bg-gray-700 px-4 py-3.5 text-center text-sm font-semibold uppercase text-white transition duration-200 ease-in-out hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-700 focus-visible:ring-offset-2 active:scale-95"
+              className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
             >
-              Add Task
+              <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                Add Task
+              </span>
             </button>
           </div>
         </div>
@@ -239,4 +232,4 @@ const Tasks = () => {
   );
 };
 
-export default Tasks;
+export default withAuth(Tasks);

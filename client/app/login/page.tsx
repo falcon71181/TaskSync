@@ -51,14 +51,14 @@ const Login: React.FC = () => {
 
   return (
     <main className="w-full h-full flex items-center justify-center">
-      <div className="w-96 rounded-2xl bg-slate-900">
+      <div className="w-96 rounded-2xl border-[1px] dark:border-gray-300 bg-slate-900 dark:bg-background">
         <div className="flex flex-col gap-5 p-8">
           <p className="text-center text-3xl text-gray-300 mb-4">Login</p>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="text-white bg-slate-900 w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 focus:ring-offset-gray-800"
+            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Email"
             required
           />
@@ -66,7 +66,7 @@ const Login: React.FC = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="text-white bg-slate-900 w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 focus:ring-offset-gray-800"
+            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Password"
             required
           />
