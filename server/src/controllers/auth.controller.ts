@@ -2,7 +2,7 @@ import { RequestHandler, Request, Response } from "express";
 import { createToken } from "../lib/token";
 import { UserModel } from "../models/user.model";
 import type { User } from "../types/user.types";
-import Bun from "bun";
+import bcrypt, { compare } from "bcrypt";
 
 // register user
 const registerUser: RequestHandler = async (req: Request, res: Response) => {
@@ -41,10 +41,8 @@ const registerUser: RequestHandler = async (req: Request, res: Response) => {
       return res.status(409).send({ error: error });
     }
 
-    const hashedPassword = await Bun.password.hash(password, {
-      algorithm: "bcrypt",
-      cost: 8,
-    });
+    // Hash password
+    const hashedPassword: string = await bcrypt.hash(password, 12);
 
     // Create new user
     const newUser: User = await UserModel.create({
@@ -99,7 +97,7 @@ const loginUser: RequestHandler = async (req: Request, res: Response) => {
     }
 
     // verify password
-    const isMatch = await Bun.password.verify(password, user.password);
+    const isMatch = await compare(password, user.password);
 
     if (!isMatch) {
       const error = "Wrong password";
