@@ -171,10 +171,11 @@ const Tasks = () => {
             <Link
               key={name}
               href={href}
-              className={`${tag === filter_tag
+              className={`${
+                tag === filter_tag
                   ? "tracking-wider font-bold text-black dark:text-white underline"
                   : "text-black_darker dark:text-title_dark"
-                } hover:text-black dark:hover:text-white duration-200 hover:underline`}
+              } hover:text-black dark:hover:text-white duration-200 hover:underline`}
             >
               {name}
             </Link>

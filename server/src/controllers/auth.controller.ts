@@ -2,6 +2,7 @@ import { RequestHandler, Request, Response } from "express";
 import { createToken } from "../lib/token";
 import { UserModel } from "../models/user.model";
 import type { User } from "../types/user.types";
+import Bun from "bun";
 
 // register user
 const registerUser: RequestHandler = async (req: Request, res: Response) => {

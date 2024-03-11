@@ -74,7 +74,7 @@ const Login: React.FC = () => {
             <div className="text-red-400 font-semibold">Error : {error}</div>
           )}
           <h1 className="text-sm text-[#7f8ea3] text-center">
-            Don't have an account?
+            Don&apos;t have an account?
             <Link
               className="ml-3 underline underline-offset-4 decoration-[#e1e7ef]/40 hover:decoration-[#e1e7ef]/80"
               href="/register"

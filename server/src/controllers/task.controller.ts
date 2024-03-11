@@ -1,6 +1,5 @@
 import { Request, RequestHandler, Response } from "express";
 import { TaskModel } from "../models/task.model";
-import { Task } from "../types/task.types";
 
 // get all tasks
 const getAllTasks: RequestHandler = async (req: Request, res: Response) => {

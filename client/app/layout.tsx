@@ -1,3 +1,4 @@
+import React from "react";
 import type { Metadata } from "next";
 import NavBar from "@/components/nav/NavBar";
 import Providers from "./Providers";
@@ -21,7 +22,7 @@ export default function RootLayout({
           <section className="h-screen w-screen flex justify-center">
             <main className="h-full w-11/12 md:w-10/12 lg:w-9/12 xl:w-8/12 flex flex-col transition-all duration-500">
               <NavBar />
-              {children}
+              <React.Suspense>{children}</React.Suspense>
             </main>
           </section>
         </Providers>
