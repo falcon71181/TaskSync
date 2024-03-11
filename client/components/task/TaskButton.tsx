@@ -17,7 +17,7 @@ const TaskButton: React.FC<IButtonProps> = ({
 
   return (
     <button
-      className={`text-black dark:text-white inline-flex whitespace-nowrap items-center justify-center px-4 py-2 border border-[#27272a] font-medium text-sm rounded-md transition-colors cursor-pointer ${className}`}
+      className={`w-20 text-black dark:text-white inline-flex whitespace-nowrap items-center justify-center px-4 py-2 border border-[#27272a] font-medium text-sm rounded-md transition-colors cursor-pointer ${className}`}
       onClick={handleClick}
     >
       {children}
