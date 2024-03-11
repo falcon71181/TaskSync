@@ -97,12 +97,8 @@ const loginUser: RequestHandler = async (req: Request, res: Response) => {
       return res.status(404).send({ error });
     }
 
-    const hashedPassword = await Bun.password.hash(password, {
-      algorithm: "bcrypt",
-      cost: 8,
-    });
-
-    const isMatch = await Bun.password.verify(password, hashedPassword);
+    // verify password
+    const isMatch = await Bun.password.verify(password, user.password);
 
     if (!isMatch) {
       const error = "Wrong password";

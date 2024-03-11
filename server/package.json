@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "@types/cors": "latest",
     "@types/express": "latest",
     "@types/jsonwebtoken": "latest",
     "rimraf": "latest"
@@ -17,6 +18,7 @@
     "typescript": "latest"
   },
   "dependencies": {
+    "cors": "latest",
     "express": "latest",
     "jsonwebtoken": "latest",
     "mongoose": "latest"

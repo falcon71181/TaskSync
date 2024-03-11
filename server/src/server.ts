@@ -1,10 +1,17 @@
 import express from "express";
+import cors from "cors";
 import mongoose from "mongoose";
 import router from "./routes/routes";
 
 const app = express();
+// CORS Options
+const corsOptions = {
+  origin: (process.env?.ALLOWED_ORIGIN || "http://localhost:3333").split(","),
+  methods: (process.env?.ALLOWED_METHODS || "GET", "POST").split(","),
+};
 
 // cors
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // env
