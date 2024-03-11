@@ -7,4 +7,10 @@ type RegisterFormData = {
 
 type LoginFormData = Omit<RegisterFormData, "confirmPassword" | "username">;
 
-export type { RegisterFormData, LoginFormData };
+type AddTaskFormData = {
+  title: string;
+  description?: string;
+  tags?: string[];
+};
+
+export type { RegisterFormData, LoginFormData, AddTaskFormData };
