@@ -3,7 +3,7 @@
   "module": "src/server.ts",
   "type": "module",
   "scripts": {
-    "dev": "nodemon",
+    "dev": "npx nodemon",
     "start": "bun run build && bun run build/server.js",
     "build": "rimraf ./build && tsc",
     "vercel-build": "echo building"
