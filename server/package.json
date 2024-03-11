@@ -1,7 +1,6 @@
 {
   "name": "tasksync",
   "module": "src/server.ts",
-  "type": "module",
   "scripts": {
     "dev": "npx nodemon",
     "start": "bun run build && bun run build/server.js",
