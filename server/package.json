@@ -11,6 +11,7 @@
   "devDependencies": {
     "@types/bun": "latest",
     "@types/express": "latest",
+    "@types/jsonwebtoken": "latest",
     "rimraf": "latest"
   },
   "peerDependencies": {

@@ -3,7 +3,7 @@ import React, { useState, SyntheticEvent } from "react";
 import { RegisterFormData } from "@/types/formData";
 
 const Register: React.FC = () => {
-  const SERVER = "http://localhost:3333";
+  const SERVER = process.env.NEXT_PUBLIC_SERVER || "http://localhost:3333";
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");

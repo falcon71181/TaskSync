@@ -5,7 +5,7 @@ import Link from "next/link";
 import { LoginFormData } from "@/types/formData";
 
 const Login: React.FC = () => {
-  const SERVER = "http://localhost:3333";
+  const SERVER = process.env.NEXT_PUBLIC_SERVER || "http://localhost:3333";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

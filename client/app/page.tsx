@@ -9,7 +9,7 @@ import type { Task } from "@/types/tasks";
 import { AddTaskFormData } from "@/types/formData";
 
 const Tasks = () => {
-  const SERVER = "http://localhost:3333";
+  const SERVER = process.env.NEXT_PUBLIC_SERVER || "http://localhost:3333";
   const searchParams = useSearchParams();
   const filter_tag = searchParams.get("tag");
 
@@ -24,6 +24,10 @@ const Tasks = () => {
     e.preventDefault();
 
     try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        return;
+      }
       const formData: AddTaskFormData = {
         title: title as string,
         description: description as string,
@@ -33,6 +37,7 @@ const Tasks = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(formData),
       });
@@ -41,11 +46,7 @@ const Tasks = () => {
       // Check if the request was successful
       if (response.ok) {
         // Add data to local Storage
-        localStorage.setItem("token", result.token);
-        localStorage.setItem("username", result.username);
-
-        // redirecting to Home page after Login
-        window.location.replace("/");
+        console.log("gg");
       } else {
         // Handle Login failure
         setError(result.error);
@@ -143,7 +144,7 @@ const Tasks = () => {
   ];
 
   return (
-    <div className="relative w-full h-full overflow-y-auto p-5 flex flex-col items-center justify-center gap-1 text-black dark:text-white_light border-2 border-red-300">
+    <div className="relative w-full h-full overflow-y-auto p-5 flex flex-col items-center gap-1 text-black dark:text-white_light">
       <section className="w-full absolute top-3 flex flex-col justify-start">
         <div className="flex justify-between w-full items-center font-bold md:px-6 mb-2 sm:mb-3 lg:mb-6 md:mb-4 transition-all duration-500">
           <span className="text-2xl">All Tasks</span>
@@ -156,17 +157,18 @@ const Tasks = () => {
             <Link
               key={name}
               href={href}
-              className={`${tag === filter_tag
+              className={`${
+                tag === filter_tag
                   ? "tracking-wider font-bold text-black dark:text-white underline"
                   : "text-black_darker dark:text-title_dark"
-                } hover:text-black dark:hover:text-white duration-200 hover:underline`}
+              } hover:text-black dark:hover:text-white duration-200 hover:underline`}
             >
               {name}
             </Link>
           ))}
         </div>
       </section>
-      <div className="pt-72 flex flex-col w-full gap-3 items-center">
+      <div className=" pt-32 flex flex-col w-full gap-3 items-center">
         {taskData
           .filter((task: Task) => {
             if (filter_tag === "completed") {
@@ -189,26 +191,26 @@ const Tasks = () => {
       <main
         className={`${isAddTaskOpen ? "flex" : "hidden"} absolute justify-center items-center`}
       >
-        <div className="relative flex justify-center items-center w-96 rounded-2xl bg-slate-900">
+        <div className="relative flex justify-center items-center w-[20rem] sm:w-[30rem] md:w-[40rem] lg:w-[50rem] rounded-2xl bg-slate-900 transition-all duration-500">
           <div className="absolute top-2 right-4 text-4xl cursor-pointer hover:text-red-300 transition-all duration-200">
             <IoMdClose onClick={closeTaskForm} />
           </div>
-          <div className="flex flex-col gap-5 p-8">
+          <div className="flex flex-col gap-5 p-8 w-full sm:w-[20rem] md:w-[30rem] lg:w-[40rem] transition-all duration-500">
             <p className="text-center text-3xl text-gray-300 mb-4">Add Task</p>
             <input
               type="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="text-white bg-slate-900 w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 focus:ring-offset-gray-800"
-              placeholder="Email"
+              className="text-white bg-slate-900 rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 focus:ring-offset-gray-800"
+              placeholder="Title"
               required
             />
             <input
               type="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="text-white bg-slate-900 w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 focus:ring-offset-gray-800"
-              placeholder="Password"
+              className="text-white bg-slate-900 rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 focus:ring-offset-gray-800"
+              placeholder="Description"
               required
             />
             {error && (
