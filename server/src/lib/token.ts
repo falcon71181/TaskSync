@@ -9,7 +9,7 @@ export const createToken = (email: string): string => {
   }
 
   // Define options for token signing
-  const signOptions: SignOptions = { expiresIn: "1h" };
+  const signOptions: SignOptions = { expiresIn: "30d" };
 
   const token = jwt.sign({ email }, JWT_Secret, signOptions);
 
