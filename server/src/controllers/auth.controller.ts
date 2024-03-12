@@ -35,6 +35,12 @@ const registerUser: RequestHandler = async (req: Request, res: Response) => {
       return res.status(400).send({ error: error });
     }
 
+    // Check password length
+    if (password.length < 8) {
+      const error = "Password length is too small.";
+      return res.status(400).send({ error: error });
+    }
+
     const user = await UserModel.findOne({ email });
     if (user) {
       const error = "User already exist.";
@@ -86,6 +92,12 @@ const loginUser: RequestHandler = async (req: Request, res: Response) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       const error = "Invalid email format.";
+      return res.status(400).send({ error: error });
+    }
+
+    // Check password length
+    if (password.length < 8) {
+      const error = "Password length is too small.";
       return res.status(400).send({ error: error });
     }
 

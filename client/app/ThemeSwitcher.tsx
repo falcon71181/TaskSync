@@ -16,7 +16,7 @@ const ThemeSwitcher = () => {
   }
 
   return (
-    <div className="ml-0 sm:ml-2 text-[22px] md:text-[24px] lg:text-[28px] cursor-pointer transition-all duration-500">
+    <div className="ml-0 sm:ml-2 text-[22px] md:text-[24px] lg:text-[28px] cursor-pointer hover:rotate-45 transition-all duration-500">
       {theme === "dark" ? (
         <FiSun
           className="text-heading_white"

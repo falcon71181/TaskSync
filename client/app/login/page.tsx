@@ -10,11 +10,22 @@ const Login: React.FC = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
 
   // handle submission
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
+    // Check if password and confirm password match
+    if (password.length < 8) {
+      setError("Password length is too small.");
+      return;
+    }
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Invalid email format.");
+      return;
+    }
 
     try {
       const formData: LoginFormData = {

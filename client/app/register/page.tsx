@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, SyntheticEvent } from "react";
+import Link from "next/link";
 import { RegisterFormData } from "@/types/formData";
 
 const Register: React.FC = () => {
@@ -10,20 +11,26 @@ const Register: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
 
   // handle submission
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     // Check if password and confirm password match
-    if (password !== confirmPassword) {
-      alert("Password and Confirm Password don't match");
+    if (password.length < 8 && confirmPassword.length < 8) {
+      setError("Password length is too small.");
+      return;
+    }
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Invalid email format.");
       return;
     }
 
     try {
       const formData: RegisterFormData = {
-        username: email as string,
+        username: username as string,
         email: email as string,
         password: password as string,
         confirmPassword: confirmPassword as string,
@@ -95,7 +102,10 @@ const Register: React.FC = () => {
             placeholder="Confirm password"
             required
           />
-          <label className="flex cursor-pointer items-center justify-between p-1 text-slate-400">
+          {!(password === confirmPassword) && (
+            <h1 className="text-red-300">Passwords donot match.</h1>
+          )}
+          <label className="flex cursor-pointer items-center justify-between text-slate-400">
             Accept terms of use
             <div className="relative inline-block">
               <input
@@ -108,6 +118,15 @@ const Register: React.FC = () => {
           {error && (
             <div className="text-red-400 font-semibold">Error : {error}</div>
           )}
+          <h1 className="text-sm text-[#7f8ea3] text-center">
+            Already have an account?
+            <Link
+              className="ml-3 underline underline-offset-4 decoration-[#e1e7ef]/40 hover:decoration-[#e1e7ef]/80"
+              href="/login"
+            >
+              Login Now
+            </Link>
+          </h1>
           <button
             type="button"
             onClick={handleSubmit}
