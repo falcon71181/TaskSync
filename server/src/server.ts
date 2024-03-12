@@ -6,8 +6,13 @@ import router from "./routes/routes";
 const app = express();
 // CORS Options
 const corsOptions = {
-  origin: (process.env?.ALLOWED_ORIGIN || "http://localhost:3333").split(","),
-  methods: (process.env?.ALLOWED_METHODS || "GET", "POST").split(","),
+  origin: (
+    process.env?.ALLOWED_ORIGIN ||
+    "http://localhost:3333,https://task-sync-todo.vercel.app"
+  ).split(","),
+  methods: (
+    process.env?.ALLOWED_METHODS || "GET,POST,DELETE,PATCH,OPTIONS,HEAD,PUT"
+  ).split(","),
 };
 
 // cors
