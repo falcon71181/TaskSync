@@ -5,7 +5,8 @@ import Link from "next/link";
 import { LoginFormData } from "@/types/formData";
 
 const Login: React.FC = () => {
-  const SERVER = process.env.NEXT_PUBLIC_SERVER || "http://localhost:3333";
+  const SERVER =
+    (process.env.NEXT_PUBLIC_SERVER as string) || "http://localhost:3333";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,6 +21,7 @@ const Login: React.FC = () => {
         email: email as string,
         password: password as string,
       };
+      console.log(`${SERVER}/users/login`);
 
       const response = await fetch(`${SERVER}/users/login`, {
         method: "POST",

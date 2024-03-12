@@ -17,7 +17,8 @@ const navItems: navItem[] = [
 ];
 
 const NavBar = () => {
-  const SERVER = process.env.NEXT_PUBLIC_SERVER || "http://localhost:3333";
+  const SERVER =
+    (process.env.NEXT_PUBLIC_SERVER as string) || "http://localhost:3333";
   const pathname = usePathname();
 
   const [isLogin, setIsLogin] = useState(false);

@@ -4,7 +4,8 @@ import { useEffect } from "react";
 const withAuth = (WrappedComponent: React.ComponentType<any>) => {
   const Auth = (props: any) => {
     const router = useRouter();
-    const SERVER = process.env.NEXT_PUBLIC_SERVER || "http://localhost:3333";
+    const SERVER =
+      (process.env.NEXT_PUBLIC_SERVER as string) || "http://localhost:3333";
 
     useEffect(() => {
       // Verify User's jwt token

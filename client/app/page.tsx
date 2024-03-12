@@ -46,7 +46,18 @@ const Tasks = () => {
 
       // Check if the request was successful
       if (response.ok) {
+        let newTask: Task = {
+          _id: "01010100101",
+          title: title,
+          description: description,
+          isCompleted: false,
+          tag: [],
+        };
+        // close window model
         setIsAddTaskOpen(false);
+        // add task to taskData
+        taskData.reverse().push(newTask);
+        setTaskData(taskData.reverse());
       } else {
         // Handle Login failure
         setError(result.error);
