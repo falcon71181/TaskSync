@@ -214,7 +214,7 @@ const Tasks = () => {
           ))}
       </div>
       <main
-        className={`${isAddTaskOpen ? "flex" : "hidden"} absolute justify-center items-center`}
+        className={`${isAddTaskOpen ? "flex" : "hidden"} fixed justify-center items-center`}
       >
         <div className="relative flex justify-center items-center w-[20rem] sm:w-[25rem] md:w-[30rem] lg:w-[40rem] rounded-2xl border-[1px] dark:border-gray-300 bg-slate-700 dark:bg-background transition-all duration-500">
           <div className="absolute top-2 right-4 text-4xl cursor-pointer hover:text-red-300 transition-all duration-200">
