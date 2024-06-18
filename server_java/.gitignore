@@ -1,0 +1,97 @@
+# Java & Spring Boot specific
+target/
+*.class
+*.war
+*.jar
+
+# Logs
+logs/
+*.log
+
+# Spring Boot specific
+spring.log
+
+# Maven specific
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+target/
+out/
+
+# Gradle specific
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Eclipse specific
+.project
+.classpath
+.c9/
+.settings/
+.apt_generated/
+.factorypath
+.recommenders/
+.terragrunt-cache/
+
+# IDEA specific
+.idea/
+*.iml
+*.iws
+.idea_modules/
+.idea_system/
+.idea_workspace/
+*.ipr
+*.iws
+
+# VS Code specific
+.vscode/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# IntelliJ IDEA
+*.iml
+.idea/
+*.iws
+.idea/libraries
+.idea/modules.xml
+.idea/*.xml
+.idea/workspace.xml
+.idea/codeStyles/
+.idea/dictionaries/
+.idea/consoles/
+.idea/inspectionProfiles/
+.idea/shelf/
+.idea/tasks/
+.idea/workspace.xml
+.idea_modules/
+
+# Windows
+*.bat
+*.cmd
+*.exe
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# Others
+*.class
+*.log
+*.war
+*.ear
+*.jar
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Ignore build directories
+bin/
+build/
