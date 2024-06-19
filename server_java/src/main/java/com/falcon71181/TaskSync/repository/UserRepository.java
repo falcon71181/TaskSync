@@ -5,4 +5,7 @@ import org.bson.types.ObjectId;
 import com.falcon71181.TaskSync.models.User;
 
 public interface UserRepository extends MongoRepository<User, ObjectId> {
+  Boolean existsByUsername(String username);
+
+  Boolean existsByEmail(String email);
 }
