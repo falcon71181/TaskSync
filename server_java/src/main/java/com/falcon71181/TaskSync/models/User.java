@@ -2,14 +2,18 @@ package com.falcon71181.TaskSync.models;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.lang.NonNull;
+
+import lombok.Data;
 
 /**
  * User
  */
 @Document(collection = "users")
+@Data
 public class User {
 
   @Id
@@ -17,6 +21,7 @@ public class User {
   @NonNull
   private String username;
   @NonNull
+  @Indexed(unique = true)
   private String email;
   @NonNull
   private String password;
@@ -25,37 +30,5 @@ public class User {
     this.username = username;
     this.email = email;
     this.password = password;
-  }
-
-  public void setId(ObjectId id) {
-    this.id = id;
-  }
-
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public ObjectId getId() {
-    return id;
-  }
-
-  public String getUsername() {
-    return username;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public String getPassword() {
-    return password;
   }
 }

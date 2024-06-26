@@ -2,9 +2,14 @@ package com.falcon71181.TaskSync.payload.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * ErrorResponse
  */
+@Getter
+@Setter
 public class ErrorResponse implements ApiResponse {
 
   @JsonProperty("error")
@@ -12,13 +17,5 @@ public class ErrorResponse implements ApiResponse {
 
   public ErrorResponse(String error) {
     this.error = error;
-  }
-
-  public void setError(String error) {
-    this.error = error;
-  }
-
-  public String getError() {
-    return error;
   }
 }
