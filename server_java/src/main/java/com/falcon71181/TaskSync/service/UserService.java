@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,6 +29,10 @@ public class UserService {
 
   public Optional<User> findByUsername(String username) {
     return userRepository.findByUsername(username);
+  }
+
+  public Optional<User> findByEmail(String email) {
+    return userRepository.findByEmail(email);
   }
 
   public boolean checkPassword(User user, String rawPassword) {
