@@ -24,6 +24,16 @@ public class TaskService {
     taskRepository.save(task);
   }
 
+  public void deleteByObjectId(ObjectId id) {
+    if (!existByObjectId(id))
+      return;
+    taskRepository.deleteById(id);
+  }
+
+  public boolean existByObjectId(ObjectId id) {
+    return taskRepository.existsById(id);
+  }
+
   public Optional<Task> findByObjectId(ObjectId id) {
     return taskRepository.findById(id);
   }

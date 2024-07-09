@@ -16,4 +16,8 @@ public interface TaskRepository extends MongoRepository<Task, ObjectId> {
   Optional<List<Task>> findByUserEmail(String email);
 
   Optional<Task> findById(ObjectId id);
+
+  void deleteById(ObjectId id);
+
+  boolean existsById(ObjectId id);
 }
