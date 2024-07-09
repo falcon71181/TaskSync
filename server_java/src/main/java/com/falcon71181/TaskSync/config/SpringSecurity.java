@@ -40,6 +40,7 @@ public class SpringSecurity {
         .requestMatchers("/users/validate").authenticated()
         .requestMatchers("/tasks/create").authenticated()
         .requestMatchers("/tasks/*/delete").authenticated()
+        .requestMatchers("/tasks/*/change").authenticated()
         .anyRequest().permitAll()
         .and()
         .httpBasic();
