@@ -61,4 +61,9 @@ public class User {
     this.email = email;
     this.password = password;
   }
+
+  // No-argument constructor (required by JPA)
+  protected User() {
+    // Default constructor explicitly required by JPA
+  }
 }
